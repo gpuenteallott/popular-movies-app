@@ -5,41 +5,47 @@
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  ListView
-} from 'react-native';
+import { AppRegistry, Navigator } from 'react-native';
 
-var Header = require('./app/components/Header/index');
-var Footer = require('./app/components/Footer/index');
-var MovieCollection = require('./app/components/MovieCollection/index');
+var MovieCollectionScene = require('./app/scenes/MovieCollectionScene/index');
+var MovieDetailsScene = require('./app/scenes/MovieDetailsScene/index');
+var TmdbApi = require('./app/services/TmdbApi');
 
 class PopularMovies extends Component {
+
+  constructor(props, context) {
+
+    super(props, context);
+
+    // This defines the initial navigation state.
+    this.state = {
+      navigationState: {
+        index: 0,
+        routes: [{key: 'MovieCollectionScene'}],
+      },
+    };
+
+    TmdbApi.loadRemoteConfiguration();
+  }
+
+  renderScene(route, navigator) {
+    if(route.name === 'MovieCollectionScene') {
+     return <MovieCollectionScene navigator={navigator} />
+    }
+    else if(route.name === 'MovieDetailsScene') {
+      return <MovieDetailsScene navigator={navigator} movie={route.movie} />
+    }
+    else {
+      throw new Error('Navigator unknown route');
+    }
+  }
   render() {
     return (
-      <ScrollView style={styles.appContainer}>
-        <View style={styles.container}>
-          <Header title="Popular Movies"/>
-          <MovieCollection />
-          <Footer />
-        </View>
-      </ScrollView>
+      <Navigator style={{ flex:1 }}
+        initialRoute={{ name: 'MovieCollectionScene' }}
+        renderScene={ this.renderScene } />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  appContainer: {
-    flex: 1,
-    backgroundColor: '#F6E9FF',
-  },
-  container: {
-    flex: 1,
-  },
-});
 
 AppRegistry.registerComponent('PopularMovies', () => PopularMovies);

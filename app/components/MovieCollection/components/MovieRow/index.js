@@ -1,13 +1,22 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
 class MovieRow extends Component {
+
+  _onPress() {
+    if( typeof this.props.onSelected === 'function' ) {
+      this.props.onSelected( this.props.movie );
+    }
+  }
+
   render() {
     return (
-      <View style={styles.movieRow}>
-       <Text style={styles.movieTitle}>{this.props.title}</Text>
-      </View>
+      <TouchableHighlight onPress={this._onPress.bind(this)}>
+        <View style={styles.movieRow}>
+         <Text style={styles.movieTitle}>{this.props.movie.title}</Text>
+        </View>
+      </TouchableHighlight>
     )
   }
 }

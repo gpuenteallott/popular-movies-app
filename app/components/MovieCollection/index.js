@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { ListView } from 'react-native';
 
 var MovieRow = require('./components/MovieRow/index');
-var fetchTmdb = require('../../services/fetchTmdb');
+var TmdbApi = require('../../services/TmdbApi');
 
 class MovieCollection extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class MovieCollection extends Component {
       dataSource: ds
     };
 
-    fetchTmdb('movie/popular')
+    TmdbApi.fetch('movie/popular')
       .then( function( response ) {
         if ( response.results ) {
           this.setState({
@@ -25,11 +25,22 @@ class MovieCollection extends Component {
       }.bind(this));
   }
 
+  onMovieSelected( movie ) {
+    if ( typeof this.props.onMovieSelected === 'function' ) {
+      this.props.onMovieSelected( movie );
+    }
+  }
+
   render() {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={(movie) => <MovieRow title={ movie.title } />}
+        renderRow={(movie) =>
+          <MovieRow
+            movie={ movie }
+            onSelected={ this.onMovieSelected.bind(this) }
+            />
+        }
       />
     )
   }
