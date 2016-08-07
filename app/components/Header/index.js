@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
-class Header extends Component {
+export default class Header extends Component {
   render() {
-
     let backButton;
     if ( this.props.onBack ) {
       backButton = (
@@ -46,5 +45,3 @@ const styles = StyleSheet.create({
     height: 24,
   }
 });
-
-module.exports = Header;

@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 
-var MovieCollection = require('../../components/MovieCollection/index');
-var Header = require('../../components/Header/index');
-var Footer = require('../../components/Footer/index');
+import Header from '../../components/Header/index';
+import Footer from '../../components/Footer/index';
+import MovieCollection from '../../components/MovieCollection/index';
 
-class MovieCollectionScene extends Component {
+export default class MovieCollectionScene extends Component {
 
   /**
    * when movie is selected, we push details new to parent navigator.
@@ -43,4 +43,3 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = MovieCollectionScene;

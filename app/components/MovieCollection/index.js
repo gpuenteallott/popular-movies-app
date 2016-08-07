@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { ListView } from 'react-native';
 
-var MovieRow = require('./components/MovieRow/index');
-var TmdbApi = require('../../services/TmdbApi');
+import MovieRow from './components/MovieRow/index';
+import TmdbApi from '../../services/TmdbApi';
 
-class MovieCollection extends Component {
+export default class MovieCollection extends Component {
   constructor(props) {
     super(props);
 
@@ -45,6 +45,3 @@ class MovieCollection extends Component {
     )
   }
 }
-
-module.exports = MovieCollection;
-

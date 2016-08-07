@@ -7,9 +7,9 @@
 import React, { Component } from 'react';
 import { AppRegistry, Navigator } from 'react-native';
 
-var MovieCollectionScene = require('./app/scenes/MovieCollectionScene/index');
-var MovieDetailsScene = require('./app/scenes/MovieDetailsScene/index');
-var TmdbApi = require('./app/services/TmdbApi');
+import MovieCollectionScene from './app/scenes/MovieCollectionScene/index';
+import MovieDetailsScene from './app/scenes/MovieDetailsScene/index';
+import TmdbApi from './app/services/TmdbApi';
 
 class PopularMovies extends Component {
 

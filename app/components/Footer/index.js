@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 
-class Footer extends Component {
+export default class Footer extends Component {
   render() {
     return (
       <View style={styles.footer}>
@@ -33,5 +33,3 @@ const styles = StyleSheet.create({
     opacity: .5
   }
 });
-
-module.exports = Footer;

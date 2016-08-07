@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
-class MovieRow extends Component {
+export default class MovieRow extends Component {
 
   _onPress() {
     if( typeof this.props.onSelected === 'function' ) {
@@ -33,6 +33,3 @@ const styles = StyleSheet.create({
     color: '#333333',
   },
 });
-
-
-module.exports = MovieRow;

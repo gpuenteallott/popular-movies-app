@@ -1,7 +1,4 @@
 
-var TMDB_API_KEY = '059e0511e05379fabc35ce28ff6c978c';
-var TMDB_API_BASE_URL = 'https://api.themoviedb.org/3/';
-
 class TmdbApi {
   constructor( config ) {
     this.apiKey = config.apiKey;
@@ -19,13 +16,13 @@ class TmdbApi {
   }
 
   image( relativePath, type ) {
-    if ( this.remoteConfig ) {
+    if ( this.remoteConfig && this.remoteConfig.images && this.remoteConfig.images[ type+'_sizes' ] ) {
       return this.remoteConfig.images.secure_base_url + this.remoteConfig.images[ type+'_sizes' ][0] + relativePath;
     }
   }
 
   fetch( url ) {
-    return this._fetchJson( TMDB_API_BASE_URL + url + '?api_key=' + TMDB_API_KEY );
+    return this._fetchJson( this.baseUrl + url + '?api_key=' + this.apiKey );
   }
 
   _fetchJson( url ) {
@@ -45,7 +42,7 @@ class TmdbApi {
   }
 }
 
-module.exports = new TmdbApi({
+export default new TmdbApi({
   apiKey: '059e0511e05379fabc35ce28ff6c978c',
   baseUrl: 'https://api.themoviedb.org/3/'
 });

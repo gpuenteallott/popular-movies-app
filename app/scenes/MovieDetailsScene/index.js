@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 
-var Header = require('../../components/Header/index');
-var Footer = require('../../components/Footer/index');
-var MovieDetails = require('../../components/MovieDetails/index');
+import Header from '../../components/Header/index';
+import Footer from '../../components/Footer/index';
+import MovieDetails from '../../components/MovieDetails/index';
 
-class MovieDetailsScene extends Component {
+export default class MovieDetailsScene extends Component {
   constructor(props) {
     super(props);
   }
@@ -37,5 +37,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-module.exports = MovieDetailsScene;
