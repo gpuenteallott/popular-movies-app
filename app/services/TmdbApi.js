@@ -16,9 +16,12 @@ class TmdbApi {
   }
 
   image( relativePath, type ) {
+    let absolutePath;
     if ( this.remoteConfig && this.remoteConfig.images && this.remoteConfig.images[ type+'_sizes' ] ) {
-      return this.remoteConfig.images.secure_base_url + this.remoteConfig.images[ type+'_sizes' ][0] + relativePath;
+      absolutePath = this.remoteConfig.images.secure_base_url + this.remoteConfig.images[ type+'_sizes' ][1] + relativePath;
     }
+    console.log('absolutePath', absolutePath);
+    return absolutePath;
   }
 
   fetch( url ) {

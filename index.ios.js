@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Navigator } from 'react-native';
+import { AppRegistry, Navigator, StyleSheet } from 'react-native';
 
 import MovieCollectionScene from './app/scenes/MovieCollectionScene/index';
 import MovieDetailsScene from './app/scenes/MovieDetailsScene/index';
@@ -41,11 +41,18 @@ class PopularMovies extends Component {
   }
   render() {
     return (
-      <Navigator style={{ flex:1 }}
+      <Navigator style={styles.navigator}
         initialRoute={{ name: 'MovieCollectionScene' }}
         renderScene={ this.renderScene } />
     );
   }
 }
+
+const styles = StyleSheet.create({
+  navigator: {
+    flex:1,
+    backgroundColor: 'white',
+  },
+});
 
 AppRegistry.registerComponent('PopularMovies', () => PopularMovies);

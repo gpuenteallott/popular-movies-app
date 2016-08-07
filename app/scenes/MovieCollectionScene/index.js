@@ -23,9 +23,9 @@ export default class MovieCollectionScene extends Component {
   render() {
     return (
       <ScrollView style={styles.appContainer}>
-        <View style={styles.container}>
-          <Header title="Popular Movies"/>
+        <View style={styles.collectionContainer}>
           <MovieCollection onMovieSelected={ this.onMovieSelected.bind(this) } />
+          <Header title="Popular Movies"/>
           <Footer />
         </View>
       </ScrollView>
@@ -36,9 +36,9 @@ export default class MovieCollectionScene extends Component {
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    backgroundColor: '#F6E9FF',
   },
-  container: {
+  collectionContainer: {
+    paddingTop: 70,
     flex: 1,
   },
 });

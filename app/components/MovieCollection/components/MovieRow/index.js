@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     borderColor: '#C5BACC',
     borderBottomWidth: 1,
     padding: 15,
-    backgroundColor: '#F6E9FF',
   },
   movieTitle: {
     color: '#333333',

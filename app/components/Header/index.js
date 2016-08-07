@@ -15,12 +15,19 @@ export default class Header extends Component {
       );
     }
 
-    return (
-      <View style={styles.header}>
-        { backButton }
+    let headerTitle;
+    if ( this.props.title ) {
+      headerTitle = (
         <Text style={styles.headerTitle}>
           { this.props.title }
         </Text>
+      );
+    }
+
+    return (
+      <View style={styles.header}>
+        { backButton }
+        { headerTitle }
       </View>
     )
   }
@@ -28,17 +35,20 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   header: {
+    height: 80,
     paddingTop: 30,
-    borderColor: '#C5BACC',
-    borderBottomWidth: 1,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 10,
-    backgroundColor: '#D99CFF',
+    // backgroundColor: '#D99CFF',
     flexDirection: 'row',
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
   headerTitle: {
     fontSize: 20,
+    backgroundColor: 'transparent',
   },
   backArrow: {
     width: 24,
