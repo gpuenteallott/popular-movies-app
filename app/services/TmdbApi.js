@@ -20,12 +20,12 @@ class TmdbApi {
     if ( this.remoteConfig && this.remoteConfig.images && this.remoteConfig.images[ type+'_sizes' ] ) {
       absolutePath = this.remoteConfig.images.secure_base_url + this.remoteConfig.images[ type+'_sizes' ][1] + relativePath;
     }
-    console.log('absolutePath', absolutePath);
     return absolutePath;
   }
 
-  fetch( url ) {
-    return this._fetchJson( this.baseUrl + url + '?api_key=' + this.apiKey );
+  fetch( url, params ) {
+    let queryString = this._serialize( Object.assign({api_key:this.apiKey}, params) );
+    return this._fetchJson( this.baseUrl + url + '?' + queryString );
   }
 
   _fetchJson( url ) {
@@ -42,6 +42,19 @@ class TmdbApi {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  _serialize(params) {
+    if( typeof params !== 'object' ) {
+      return '';
+    }
+    let str = [];
+    for(let p in params) {
+      if (params.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + '=' + encodeURIComponent(params[p]));
+      }
+    }
+    return str.join('&');
   }
 }
 

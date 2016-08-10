@@ -21,8 +21,6 @@ export default class CollapsibleText extends Component {
 
   render() {
 
-    console.log('this.state.needsCollapsing', this.state.needsCollapsing);
-
     let content = this.state.needsCollapsing && this.state.isCollapsed ?
       this.props.content.substring(0, 90) + '...' :
       this.props.content;
