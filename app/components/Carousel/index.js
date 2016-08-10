@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, Image, View } from 'react-native';
 
 import TmdbApi from '../../services/TmdbApi';
 

@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 10,
-    // backgroundColor: '#D99CFF',
     flexDirection: 'row',
     position: 'absolute',
     top: 0,

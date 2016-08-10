@@ -57,44 +57,43 @@ export default class MovieDetailsScene extends Component {
       });
 
     return (
-      <ScrollView style={styles.appContainer}>
-        <View>
-          <Image
-            resizeMode="cover"
-            source={{uri: TmdbApi.image(this.props.movie.backdrop_path,'backdrop') }}
-            style={ styles.coverImage }/>
-          <View style={styles.contentContainer}>
+      <View style={styles.fullscreen}>
+        <ScrollView style={styles.fullscreen}>
+          <View>
+            <Image
+              resizeMode="cover"
+              source={{uri: TmdbApi.image(this.props.movie.backdrop_path,'backdrop') }}
+              style={ styles.coverImage }/>
+            <View style={styles.contentContainer}>
 
-            <View style={styles.section}>
-              <Text style={styles.title}>{this.props.movie.title}</Text>
-              <Text style={styles.subtitle}>
-                <Text>{releaseYear}</Text> · <Text>{runtime}</Text> · <Text>{vote_average}</Text>
-              </Text>
-              <CollapsibleText content={ this.props.movie.overview } style={styles.overview}/>
+              <View style={styles.section}>
+                <Text style={styles.title}>{this.props.movie.title}</Text>
+                <Text style={styles.subtitle}>
+                  <Text>{releaseYear}</Text> · <Text>{runtime}</Text> · <Text>{vote_average}</Text>
+                </Text>
+                <CollapsibleText content={ this.props.movie.overview } style={styles.overview}/>
+              </View>
+
+              <View style={styles.section}>
+                <Text style={styles.header}>Photos</Text>
+                <Carousel>
+                  {photos}
+                </Carousel>
+              </View>
+
+              <View style={styles.section}>
+                <Text style={styles.header}>Cast</Text>
+                <Carousel>
+                  {cast}
+                </Carousel>
+              </View>
             </View>
 
-            <View style={styles.section}>
-              <Text style={styles.header}>Photos</Text>
-              <Carousel>
-                {photos}
-              </Carousel>
-            </View>
-
-            <View style={styles.section}>
-              <Text style={styles.header}>Cast</Text>
-              <Carousel>
-                {cast}
-              </Carousel>
-            </View>
           </View>
-
-        </View>
-
-        <Header
-          onBack={ this.onBack.bind(this) }
-           />
-        <Footer />
-      </ScrollView>
+          <Footer />
+        </ScrollView>
+        <Header onBack={ this.onBack.bind(this) } />
+      </View>
     )
   }
 }
@@ -103,7 +102,7 @@ export default class MovieDetailsScene extends Component {
 // let posterImageHeight = posterImageWidth*1.5;
 
 const styles = StyleSheet.create({
-  appContainer: {
+  fullscreen: {
     flex: 1,
   },
   coverImage: {
@@ -139,6 +138,7 @@ const styles = StyleSheet.create({
   carouselImage: {
     width: 100 * 1.777,
     height: 100,
-    marginLeft: 10,
+    marginLeft: 5,
+    marginRight: 5,
   },
 });
