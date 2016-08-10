@@ -6,36 +6,9 @@ import TmdbApi from '../../services/TmdbApi';
 
 export default class Carousel extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      uris: []
-    };
-
-    TmdbApi.fetch('movie/'+this.props.movieId+'/images')
-      .then((response) => {
-        this.setState({
-          uris: response.backdrops.map((image) => {
-            return TmdbApi.image( image.file_path, 'backdrop' );
-          })
-        })
-      });
-  }
-
   render() {
-
-    let images = this.state.uris
-      .slice(1, 10)
-      .map((uri, index) => {
-        return (
-          <Image source={{uri: uri}} style={styles.image} key={index}/>
-        );
-      });
-
     return (
       <ScrollView style={styles.wrap}
-        // contentContainerStyle={styles.container}
         automaticallyAdjustContentInsets={false}
         horizontal={true}
         pagingEnabled={true}
@@ -43,7 +16,7 @@ export default class Carousel extends Component {
         bounces={false}
         onMomentumScrollEnd={this.onAnimationEnd}
       >
-        {images}
+        {this.props.children}
       </ScrollView>
     )
   }
@@ -51,12 +24,7 @@ export default class Carousel extends Component {
 
 const styles = StyleSheet.create({
   wrap: {
-    marginLeft: -10,
-    marginRight: -10,
+    marginLeft: -20,
+    marginRight: -20,
   },
-  image: {
-    width: 100 * 1.777,
-    height: 100,
-    marginLeft: 10,
-  }
 });

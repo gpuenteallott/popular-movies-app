@@ -6,6 +6,7 @@ import Header from '../../components/Header/index';
 import Footer from '../../components/Footer/index';
 import CollapsibleText from '../../components/CollapsibleText/index';
 import Carousel from '../../components/Carousel/index';
+import PersonCard from '../../components/PersonCard/index';
 
 import TmdbApi from '../../services/TmdbApi';
 
@@ -16,9 +17,15 @@ export default class MovieDetailsScene extends Component {
     this.state = {
       runtime: '',
       vote_average: '',
+      images: {
+        backdrops: [],
+      },
+      credits: {
+        cast: [],
+      },
     };
 
-    TmdbApi.fetch('movie/' + this.props.movie.id, {append_to_response: 'credits'} )
+    TmdbApi.fetch('movie/' + this.props.movie.id, {append_to_response: 'credits,images'} )
       .then((response) => {
         this.setState( response )
       });
@@ -32,6 +39,22 @@ export default class MovieDetailsScene extends Component {
     let releaseYear = this.props.movie.release_date.replace(/([0-9]{4}).[0-9]{2}.[0-9]{2}/, '$1');
     let runtime = this.state.runtime ? this.state.runtime + 'min' : '';
     let vote_average = this.state.vote_average;
+
+    let photos = this.state.images.backdrops
+      .slice(1, 10)
+      .map((image) => {
+        return TmdbApi.image( image.file_path, 'backdrop' );
+      })
+      .map((uri, index) => {
+        return (
+          <Image source={{uri: uri}} style={styles.carouselImage} key={index}/>
+        );
+      });
+
+    let cast = this.state.credits.cast
+      .map((person, index) => {
+        return <PersonCard person={person} key={index}/>
+      });
 
     return (
       <ScrollView style={styles.appContainer}>
@@ -50,10 +73,18 @@ export default class MovieDetailsScene extends Component {
               <CollapsibleText content={ this.props.movie.overview } style={styles.overview}/>
             </View>
 
-
             <View style={styles.section}>
               <Text style={styles.header}>Photos</Text>
-              <Carousel movieId={this.props.movie.id} />
+              <Carousel>
+                {photos}
+              </Carousel>
+            </View>
+
+            <View style={styles.section}>
+              <Text style={styles.header}>Cast</Text>
+              <Carousel>
+                {cast}
+              </Carousel>
             </View>
           </View>
 
@@ -104,5 +135,10 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 18,
     paddingBottom: 5,
-  }
+  },
+  carouselImage: {
+    width: 100 * 1.777,
+    height: 100,
+    marginLeft: 10,
+  },
 });
